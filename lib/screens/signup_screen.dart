@@ -79,114 +79,111 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                flex: 2,
-                child: Container(),
-              ),
-              //svg image
-              SvgPicture.asset(
-                ImageAssets.logoApp,
-                color: primaryColor,
-                height: 64,
-              ),
-              const SizedBox(
-                height: 48,
-              ),
-              // Circular widget to accept and show our selected file
-              Stack(
-                children: [
-                  _image != null
-                      ? CircleAvatar(
-                          radius: 64, backgroundImage: MemoryImage(_image!))
-                      : CircleAvatar(
-                          radius: 64,
-                          child: SvgPicture.asset(
-                            ImageAssets.icUserDefault,
-                            height: 160,
-                          ),
-                        ),
-                  Positioned(
-                    bottom: -10,
-                    left: 80,
-                    child: IconButton(
-                      onPressed: () {
-                        selectImage();
-                      },
-                      icon: const Icon(Icons.add_a_photo),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              // Text field for username
-              TextFieldInput(
-                hintText: enterYourUsername,
-                textInputType: TextInputType.text,
-                textEditingController: _usernameController,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              // Text field input for email
-              TextFieldInput(
-                hintText: enterYourEmail,
-                textInputType: TextInputType.emailAddress,
-                textEditingController: _emailController,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              // Text field input for password
-              TextFieldInput(
-                hintText: enterYourPass,
-                textInputType: TextInputType.text,
-                textEditingController: _passwordController,
-                isPass: true,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              TextFieldInput(
-                hintText: enterYourBio,
-                textInputType: TextInputType.text,
-                textEditingController: _bioController,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              // Button login
-              InkWell(
-                onTap: signUpUser,
-                child: Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: const ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      color: blueColor),
-                  child: _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColor,
-                          ),
-                        )
-                      : const Text(signup),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 48,
                 ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Flexible(
-                flex: 2,
-                child: Container(),
-              ),
-            ],
+                //svg image
+                SvgPicture.asset(
+                  ImageAssets.logoApp,
+                  color: primaryColor,
+                  height: 64,
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                // Circular widget to accept and show our selected file
+                Stack(
+                  children: [
+                    _image != null
+                        ? CircleAvatar(
+                            radius: 64, backgroundImage: MemoryImage(_image!))
+                        : CircleAvatar(
+                            radius: 64,
+                            child: SvgPicture.asset(
+                              ImageAssets.icUserDefault,
+                              height: 160,
+                            ),
+                          ),
+                    Positioned(
+                      bottom: -10,
+                      left: 80,
+                      child: IconButton(
+                        onPressed: () {
+                          selectImage();
+                        },
+                        icon: const Icon(Icons.add_a_photo),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                // Text field for username
+                TextFieldInput(
+                  hintText: enterYourUsername,
+                  textInputType: TextInputType.text,
+                  textEditingController: _usernameController,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                // Text field input for email
+                TextFieldInput(
+                  hintText: enterYourEmail,
+                  textInputType: TextInputType.emailAddress,
+                  textEditingController: _emailController,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                // Text field input for password
+                TextFieldInput(
+                  hintText: enterYourPass,
+                  textInputType: TextInputType.text,
+                  textEditingController: _passwordController,
+                  isPass: true,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                TextFieldInput(
+                  hintText: enterYourBio,
+                  textInputType: TextInputType.text,
+                  textEditingController: _bioController,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                // Button login
+                InkWell(
+                  onTap: signUpUser,
+                  child: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: const ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        color: blueColor),
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
+                            ),
+                          )
+                        : const Text(signup),
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+              ],
+            ),
           ),
         ),
       ),
