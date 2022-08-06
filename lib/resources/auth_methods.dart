@@ -18,7 +18,7 @@ class AuthMethods {
     required String bio,
     required Uint8List? file,
   }) async {
-    String res = "Some error occured";
+    String res = "Some error occurred";
 
     try {
       if (email.isNotEmpty || password.isNotEmpty || username.isNotEmpty || bio.isNotEmpty) {
@@ -61,4 +61,31 @@ class AuthMethods {
     }
     return res;
   }
+
+  /// Login user
+  Future<String> loginUser({
+    required String email,
+    required String password
+  }) async {
+    String res = "Some error occurred";
+
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(email: email, password: password);
+        res = "Success";
+      } else {
+        res = "Please enter all the fields";
+      }
+    } on FirebaseAuthException catch(error) {
+      if (error.code == 'user-not-found' || error.code == 'wrong-password') {
+        res = 'Wrong email or password';
+      }
+    }
+    catch(error) {
+      res = error.toString();
+    }
+
+    return res;
+  }
+
 }
