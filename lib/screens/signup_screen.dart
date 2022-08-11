@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagramclone/resources/auth_methods.dart';
+import 'package:instagramclone/responsive/mobile_screen_layout.dart';
+import 'package:instagramclone/responsive/responsive_layout_screen.dart';
+import 'package:instagramclone/responsive/web_screen_layout.dart';
 import 'package:instagramclone/utils/colors.dart';
 import 'package:instagramclone/utils/image_assets.dart';
 import 'package:instagramclone/utils/string.dart';
@@ -69,6 +72,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (res != 'Success') {
       showSnackBar(res, context);
+    } else {
+      showSnackBar(signUpSuccess, context);
+      Navigator.of(context).pop();
     }
   }
 
