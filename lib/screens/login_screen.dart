@@ -4,7 +4,6 @@ import 'package:instagramclone/resources/auth_methods.dart';
 import 'package:instagramclone/responsive/mobile_screen_layout.dart';
 import 'package:instagramclone/responsive/responsive_layout_screen.dart';
 import 'package:instagramclone/responsive/web_screen_layout.dart';
-import 'package:instagramclone/screens/home_screen.dart';
 import 'package:instagramclone/screens/signup_screen.dart';
 import 'package:instagramclone/utils/colors.dart';
 import 'package:instagramclone/utils/image_assets.dart';
@@ -38,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     String res = await AuthMethods().loginUser(email: _emailController.text, password: _passwordController.text);
+    if (!mounted) return;
 
     if (res == 'Success') {
       // Login success
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mobileScreenLayout: MobileScreenLayout(),
           ),
         ),
-      )
+      );
     } else {
       showSnackBar(res, context);
     }

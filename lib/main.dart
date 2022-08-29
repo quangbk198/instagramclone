@@ -6,7 +6,6 @@ import 'package:instagramclone/responsive/mobile_screen_layout.dart';
 import 'package:instagramclone/responsive/responsive_layout_screen.dart';
 import 'package:instagramclone/responsive/web_screen_layout.dart';
 import 'package:instagramclone/screens/login_screen.dart';
-import 'package:instagramclone/screens/signup_screen.dart';
 import 'package:instagramclone/utils/colors.dart';
 
 void main() async {
