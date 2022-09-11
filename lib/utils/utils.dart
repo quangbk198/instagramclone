@@ -23,3 +23,8 @@ showSnackBar(String content, BuildContext context) {
     SnackBar(content: Text(content))
   );
 }
+
+/// Unfocus view to hide software keyboard, unfocus textfield,...
+unFocusView() {
+  FocusManager.instance.primaryFocus?.unfocus();
+}
