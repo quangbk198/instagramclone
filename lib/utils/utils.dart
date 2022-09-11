@@ -9,6 +9,8 @@ pickImage(ImageSource source) async {
 
   if (file != null) {
     return await file.readAsBytes();
+  } else {
+    return null;
   }
 
   if (kDebugMode) {

@@ -6,4 +6,5 @@ const String enterYourPass = 'Enter your password';
 const String login = 'Log in';
 const String signup = 'Sign up';
 const String haveAccount = 'Don\'t have an account? ';
-const String signUpSuccess = 'Sign up success ';
+const String signUpSuccess = 'Sign up success';
+const String postTo = 'Post to';
