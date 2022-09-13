@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:instagramclone/utils/colors.dart';
 import 'package:intl/intl.dart';
 
@@ -74,8 +76,12 @@ class PostCard extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
-            child: Image.network(
-              snap['postUrl'],
+            child: CachedNetworkImage(
+              imageUrl: snap['postUrl'],
+              placeholder: (context, url) => const SpinKitThreeBounce(
+                color: Colors.white,
+                size: 15,
+              ),
               fit: BoxFit.cover,
             ),
           ),
