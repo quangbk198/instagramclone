@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramclone/models/user.dart';
 import 'package:instagramclone/providers/user_provider.dart';
@@ -53,7 +54,25 @@ class _CommentsScreenState extends State<CommentsScreen> {
         title: const Text('Comments'),
         centerTitle: false,
       ),
-      body: CommentCard(),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('posts').doc(widget.snap['postId']).collection('comments').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return ListView.builder(
+            cacheExtent: 9999,
+            physics: const BouncingScrollPhysics(),
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) => CommentCard(
+              snap: snapshot.data!.docs[index].data(),
+            ),
+          );
+        },
+      ),
       bottomNavigationBar: SafeArea(
         child: Container(
           height: kToolbarHeight,
@@ -88,7 +107,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
               ),
               InkWell(
                 onTap: () async {
-                  if (!isEmptyTextField) {
+                  if (_commentController.text.isNotEmpty) {
                     FirestoreMethod().postComment(
                       widget.snap['postId'],
                       _commentController.text,
@@ -97,6 +116,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       user.photoUrl,
                     );
                     unFocusView();
+                    _commentController.clear();
                   }
                 },
                 child: Container(
