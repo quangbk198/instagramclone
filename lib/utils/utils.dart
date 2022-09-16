@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,10 +10,6 @@ pickImage(ImageSource source) async {
     return await file.readAsBytes();
   } else {
     return null;
-  }
-
-  if (kDebugMode) {
-    print('No image selected');
   }
 }
 
