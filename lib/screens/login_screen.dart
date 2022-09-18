@@ -6,6 +6,7 @@ import 'package:instagramclone/responsive/responsive_layout_screen.dart';
 import 'package:instagramclone/responsive/web_screen_layout.dart';
 import 'package:instagramclone/screens/signup_screen.dart';
 import 'package:instagramclone/utils/colors.dart';
+import 'package:instagramclone/utils/global_variables.dart';
 import 'package:instagramclone/utils/image_assets.dart';
 import 'package:instagramclone/utils/string.dart';
 import 'package:instagramclone/utils/utils.dart';
@@ -25,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -36,15 +36,15 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
-    String res = await AuthMethods().loginUser(email: _emailController.text, password: _passwordController.text);
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
     if (!mounted) return;
 
     if (res == 'Success') {
       // Login success
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) =>
-          const ResponsiveLayout(
+          builder: (context) => const ResponsiveLayout(
             webScreenLayout: WebScreenLayout(),
             mobileScreenLayout: MobileScreenLayout(),
           ),
@@ -64,7 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: MediaQuery.of(context).size.width > webScreenSize
+              ? EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 3)
+              : const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,20 +111,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: const ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5)
-                      )
-                    ),
-                    color: blueColor
-                  ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      color: blueColor),
                   child: _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                          color: primaryColor,
-                        ),
-                      )
-                    : const Text(login),
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,
+                          ),
+                        )
+                      : const Text(login),
                 ),
               ),
               const SizedBox(
@@ -142,17 +140,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const SignUpScreen(),)
-                      );
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const SignUpScreen(),
+                      ));
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
                         signup,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold
-                        ),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

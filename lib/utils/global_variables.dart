@@ -11,7 +11,7 @@ List<Widget> homeScreenItem = [
   const FeedScreen(),
   const SearchScreen(),
   const AddPostScreen(),
-  const Text('noti'),
+  const Center(child: Text('The feature will be released in the future')),
   ProfileScreen(
     uid: FirebaseAuth.instance.currentUser!.uid,
   ),
